@@ -1,0 +1,110 @@
+.foot {
+  margin-top: 4rem;
+  background: var(--ink-surface);
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.foot h2,
+.foot strong {
+  color: #fff;
+}
+
+.top {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: 3rem var(--gutter) 2rem;
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+}
+
+.about {
+  max-width: 30rem;
+}
+
+.logo {
+  height: 21px;
+  width: auto;
+  filter: invert(1) brightness(1.6);
+}
+
+.tagline {
+  margin-top: 0.9rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.9375rem;
+}
+
+.priceNote {
+  margin-top: 0.6rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.colTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.85rem;
+}
+
+.col ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.col a {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.col a:hover {
+  color: #7fb2ff;
+}
+
+.legalBlock {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: 1.5rem var(--gutter) 2.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.entity {
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 68rem;
+}
+
+.channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 2rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.channels a {
+  color: #7fb2ff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.copy {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 760px) {
+  .top {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}

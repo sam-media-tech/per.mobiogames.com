@@ -1,0 +1,236 @@
+.hero {
+  position: relative;
+  background: var(--ink-surface);
+}
+
+/* The radios drive everything. Kept in the accessibility tree (focusable via the
+   labels) but visually removed. */
+.radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  min-height: clamp(520px, 78vh, 760px);
+}
+
+/* Every slide occupies the same grid cell; only the checked one is shown. */
+.slide {
+  grid-area: 1 / 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease;
+}
+
+.radio:nth-of-type(1):checked ~ .stage .slide:nth-child(1),
+.radio:nth-of-type(2):checked ~ .stage .slide:nth-child(2),
+.radio:nth-of-type(3):checked ~ .stage .slide:nth-child(3),
+.radio:nth-of-type(4):checked ~ .stage .slide:nth-child(4),
+.radio:nth-of-type(5):checked ~ .stage .slide:nth-child(5),
+.radio:nth-of-type(6):checked ~ .stage .slide:nth-child(6) {
+  opacity: 1;
+  visibility: visible;
+}
+
+.art {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Enough veil for white type and the price line to stay readable on any artwork,
+   without hiding the art. */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  /* Bottom-weighted: the artwork stays bright at the top, and the copy sits in
+     the darker half. Same idea as the reference site. */
+  background:
+    linear-gradient(0deg, rgba(8, 11, 22, 0.88) 0%, rgba(8, 11, 22, 0.62) 32%, rgba(8, 11, 22, 0.18) 68%, rgba(8, 11, 22, 0.06) 100%),
+    radial-gradient(90% 60% at 50% 78%, rgba(8, 11, 22, 0.45) 0%, transparent 70%);
+}
+
+.copy {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  /* Bottom padding clears the numbered pagination and the scroll hint, both of
+     which are absolutely positioned inside the stage. */
+  padding: clamp(6rem, 16vw, 11rem) var(--gutter) clamp(5.5rem, 10vw, 7rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--on-art);
+}
+
+.kicker {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+.title {
+  margin-top: 0.9rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.3rem, 6.6vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.5);
+}
+
+.sub {
+  margin: 0.85rem auto 0;
+  max-width: 46ch;
+  font-size: clamp(0.95rem, 1.5vw, 1.0625rem);
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+}
+
+.actions {
+  margin-top: 1.6rem;
+  display: flex;
+  justify-content: center;
+}
+
+.ghost {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--r-pill);
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.ghost:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #fff;
+}
+
+/* ---- the one subscribe CTA, shared by every slide ---- */
+
+/* Sits under the artwork rather than on it: the disclosure is read at full
+   contrast against a flat surface instead of competing with the game art, and
+   it exists exactly once no matter how many slides there are. */
+.ctaBand {
+  position: relative;
+  z-index: 3;
+  padding: clamp(1.5rem, 4vw, 2.25rem) var(--gutter) clamp(1.75rem, 4vw, 2.5rem);
+  background: var(--ink-surface);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ---- numbered pagination ---- */
+
+.dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1.4rem;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.dot {
+  min-width: 42px;
+  padding: 0.35rem 0.15rem;
+  border-radius: var(--r-pill);
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.dot:hover {
+  color: #fff;
+}
+
+.radio:nth-of-type(1):checked ~ .stage .dots .dot:nth-child(1),
+.radio:nth-of-type(2):checked ~ .stage .dots .dot:nth-child(2),
+.radio:nth-of-type(3):checked ~ .stage .dots .dot:nth-child(3),
+.radio:nth-of-type(4):checked ~ .stage .dots .dot:nth-child(4),
+.radio:nth-of-type(5):checked ~ .stage .dots .dot:nth-child(5),
+.radio:nth-of-type(6):checked ~ .stage .dots .dot:nth-child(6) {
+  color: var(--ink);
+  background: #fff;
+}
+
+.radio:focus-visible ~ .stage .dots .dot {
+  outline: none;
+}
+
+
+
+/* ---- scroll affordance ---- */
+
+.scrollHint {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4.2rem;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.mouse {
+  display: block;
+  width: 20px;
+  height: 30px;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--r-pill);
+  position: relative;
+}
+
+.mouse::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 2px;
+  height: 6px;
+  margin-left: -1px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 700px) {
+  .scrollHint {
+    display: none;
+  }
+}

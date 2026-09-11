@@ -1,0 +1,60 @@
+.strip {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.inner {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: 0.55rem var(--gutter);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.price {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Separators are generated, so hiding a part never leaves two phrases glued
+   together — which is exactly what happened when the dots were their own
+   elements and the mobile rule hid them. */
+.item,
+.wide {
+  display: inline;
+}
+
+.item::before,
+.wide::before {
+  content: ' · ';
+  color: var(--ink-3);
+  padding-inline: 0.15rem;
+}
+
+.link {
+  color: var(--action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Phone: the SAME disclosure, smaller and wrapped onto more lines.
+   It used to hide the email address and the billing entity here with
+   `display: none`. Peru is a prepaid, phone-first market, so that hid the
+   billing entity from almost every real visitor — and a compliance scan reads
+   any display:none carrying price or cancellation terms as concealed text.
+   Two extra lines on a phone is the cheaper trade by far. */
+@media (max-width: 760px) {
+  .inner {
+    font-size: 0.8125rem;
+    padding-block: 0.5rem;
+  }
+
+  .price {
+    display: block;
+  }
+
+  .item:first-of-type::before {
+    content: none;
+  }
+}

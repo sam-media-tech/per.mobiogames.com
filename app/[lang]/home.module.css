@@ -1,0 +1,135 @@
+.shell {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.h2 {
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  margin-bottom: 1.5rem;
+}
+
+/* ---- how it works ---- */
+
+.band {
+  margin-top: 3rem;
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  background: var(--surface);
+  border-block: 1px solid var(--line);
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  counter-reset: step;
+}
+
+.step {
+  padding: 1.4rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+
+.num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  background: var(--brand-sweep);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.stepTitle {
+  font-size: 1.0625rem;
+  margin-bottom: 0.35rem;
+}
+
+.stepBody {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+
+/* ---- what's included ---- */
+
+.includes {
+  list-style: none;
+  padding: 0;
+  margin-block: 0 1rem;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: 1fr;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.include {
+  background: var(--bg);
+  padding: 1.25rem 1.4rem;
+}
+
+.incTitle {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.incBody {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+
+/* ---- closer ---- */
+
+.closer {
+  margin-top: 3rem;
+  padding-block: clamp(2.5rem, 6vw, 3.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.closerTitle {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  max-width: 18ch;
+  margin-bottom: 0.75rem;
+}
+
+.closerNote {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+  margin-bottom: 1.5rem;
+  max-width: 48ch;
+}
+
+.legalTail {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: 0 var(--gutter) 1rem;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+
+@media (min-width: 720px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .includes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1000px) {
+  .includes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.section {
+  padding-block: 2.5rem;
+}

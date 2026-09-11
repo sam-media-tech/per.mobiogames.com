@@ -1,0 +1,26 @@
+{
+  "name": "beyondvr-next",
+  "version": "0.1.0",
+  "private": true,
+  "description": "BeyondVR \u2014 mobile games portal + subscription LP in one Next.js app (no Ouisys build fingerprint).",
+  "scripts": {
+    "dev": "next dev -p 3200",
+    "build": "next build",
+    "start": "next start -p 3200",
+    "import:games": "node scripts/import-games.mjs",
+    "import:videos": "node scripts/import-videos.mjs",
+    "export:static": "node scripts/export-static.mjs",
+    "build:demo": "NEXT_PUBLIC_DEMO_MODE=1 next build"
+  },
+  "dependencies": {
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^6.0.3"
+  }
+}

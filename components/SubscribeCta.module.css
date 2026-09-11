@@ -1,0 +1,62 @@
+/* Locally scoped — tokens come from app/globals.css :root.
+   The price disclosure lives in BillingTerms.module.css; this file styles only
+   the button and its row. */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 46rem;
+}
+
+.wrap[data-align='center'] {
+  align-items: center;
+  text-align: center;
+  margin-inline: auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.wrap[data-align='center'] .row {
+  justify-content: center;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 52px;
+  padding: 0 1.75rem;
+  border-radius: var(--r-pill);
+  background: var(--action);
+  color: var(--action-ink);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  letter-spacing: -0.01em;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.button:hover {
+  background: var(--action-hover);
+}
+
+.button:active {
+  transform: translateY(1px);
+}
+
+.button[data-variant='outline'] {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+}
+
+.button[data-variant='outline']:hover {
+  border-color: var(--action);
+  color: var(--action);
+}

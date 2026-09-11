@@ -1,0 +1,60 @@
+/* Not "fine print": same reading size as body copy, full contrast on the price,
+   sitting directly beneath whatever starts the subscription. */
+.terms {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 46rem;
+}
+
+.price {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.sep {
+  padding-inline: 0.4rem;
+  color: var(--ink-3);
+}
+
+.mail {
+  color: var(--action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.carrier {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  color: var(--ink-3);
+}
+
+/* On hero artwork: same words, same position, inverted colours. */
+.terms[data-tone='art'] {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
+}
+
+.terms[data-tone='art'] .price {
+  color: #fff;
+}
+
+.terms[data-tone='art'] .sep {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.terms[data-tone='art'] .mail {
+  color: #fff;
+}
+
+.terms[data-tone='art'] .carrier {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Compact: one line, less visual weight. The carrier sentence is not RENDERED
+   in this variant (see BillingTerms.tsx) — there is deliberately no rule here
+   hiding it, because hiding disclosure text is the thing to avoid. */
+.terms[data-compact='true'] {
+  font-size: 0.8125rem;
+}

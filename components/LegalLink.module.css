@@ -1,0 +1,15 @@
+/* Announced by screen readers and present in the DOM for any reviewer reading
+   the markup, without cluttering the consent sentence visually. This is NOT
+   hidden content in the cloaking sense — it describes the link it sits inside,
+   and the link's behaviour matches it exactly. */
+.hint {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

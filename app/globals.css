@@ -1,0 +1,126 @@
+/* ============================================================================
+   globals.css — reset + design tokens ONLY.
+
+   LIGHT theme. Clean white shell, full-bleed game artwork, one strong accent —
+   the Gameloft reference. The artwork is the colour; the page around it is not.
+
+   Deliberately no utility classes. Every component styles itself through a CSS
+   Module, so the rendered DOM shares no class string with any sibling SAM site
+   (their most fingerprintable strings are exactly this kind of global helper).
+   ========================================================================== */
+
+:root {
+  /* surfaces */
+  --bg: #ffffff;
+  --surface: #f5f7fb;
+  --surface-2: #ffffff;
+  --surface-3: #eaeef6;
+  --ink-surface: #0f1424; /* the one dark block: the footer */
+
+  /* brand — from the BeyondVR logo gradient */
+  --brand-a: #6f22b2;
+  --brand-b: #11d0ef;
+  --brand-sweep: linear-gradient(90deg, var(--brand-a), var(--brand-b));
+
+  /* action — cobalt, as on the live BeyondVR storefront */
+  --action: #2455e6;
+  --action-hover: #1b45c4;
+  --action-ink: #ffffff;
+
+  /* text */
+  --ink: #0f1424;
+  --ink-2: #4b5670;
+  --ink-3: #78829a;
+  --on-art: #ffffff; /* text sitting on top of hero artwork */
+
+  /* lines */
+  --line: rgba(15, 20, 36, 0.1);
+  --line-strong: rgba(15, 20, 36, 0.2);
+
+  /* status */
+  --ok: #12a06a;
+  --bad: #d23b3b;
+
+  /* metrics */
+  --shell: 1240px;
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --r-sm: 0.5rem;
+  --r-md: 0.875rem;
+  --r-lg: 1.125rem;
+  --r-pill: 999px;
+  --bar-h: 66px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display, var(--font-body, system-ui, sans-serif));
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--action);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Reviewers open pages with reduced motion on; nothing may depend on animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,245 @@
+.card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: clamp(1.5rem, 3.5vw, 2rem);
+  max-width: 30rem;
+  width: 100%;
+  /* The card sits on top of dark hero artwork, and that section sets a white
+     text colour. Without resetting it here every label in the card inherits
+     white and disappears against the white card. */
+  color: var(--ink);
+  box-shadow: 0 24px 60px rgba(8, 11, 22, 0.28);
+}
+
+.title {
+  font-size: 1.375rem;
+  margin-bottom: 1.1rem;
+  color: var(--ink);
+}
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9375rem;
+  color: var(--ink-3);
+}
+
+.stepItem[data-on='true'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.stepNum {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--surface-3);
+  color: var(--ink-2);
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.stepItem[data-on='true'] .stepNum {
+  background: var(--action);
+  color: var(--action-ink);
+}
+
+.label {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-bottom: 0.45rem;
+  color: var(--ink);
+}
+
+.phoneRow {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.phoneRow:focus-within {
+  border-color: var(--action);
+}
+
+.dial {
+  display: flex;
+  align-items: center;
+  padding-inline: 0.9rem;
+  background: var(--surface-3);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1rem;
+  border-right: 1px solid var(--line);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 52px;
+  padding-inline: 0.9rem;
+  border: 0;
+  background: transparent;
+  font-size: 1.0625rem;
+  letter-spacing: 0.02em;
+}
+
+.input:focus {
+  outline: none;
+}
+
+/* the PIN step uses the input on its own */
+form > .input {
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--bg);
+}
+
+form > .input:focus {
+  border-color: var(--action);
+}
+
+.check {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.check input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--action);
+  cursor: pointer;
+}
+
+.inlineLink {
+  color: var(--action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  margin-top: 1.25rem;
+  padding-inline: 1.5rem;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--action);
+  color: var(--action-ink);
+  font-size: 1.0625rem;
+  font-weight: 700;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--action-hover);
+}
+
+.submit:disabled {
+  background: var(--surface-3);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.retry {
+  display: block;
+  width: 100%;
+  margin-top: 0.9rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.error {
+  margin-top: 0.9rem;
+  font-size: 0.875rem;
+  color: var(--bad);
+}
+
+.doneMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 0.9rem;
+  border-radius: 50%;
+  background: var(--ok);
+  color: var(--bg);
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.lede {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  margin-bottom: 1rem;
+}
+
+/* Static preview builds only. Deliberately loud: nobody should mistake the
+   preview for a working subscription. */
+.demoFlag {
+  margin-bottom: 0.9rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+.terms {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+/* Live validation. A disabled submit that will not say why is a dead end —
+   people type the +51 the field already shows, get an eleven-digit value that
+   can never validate, and nothing on screen explains it. */
+.fieldError {
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #b3401c;
+}
+
+.blocked {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}

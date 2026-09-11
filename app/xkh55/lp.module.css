@@ -1,0 +1,297 @@
+/* ---------------------------------------------------------------- hero ---- */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--ink-surface);
+}
+
+.heroArt {
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+}
+
+.heroVeil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(100deg, rgba(8, 11, 22, 0.94) 0%, rgba(8, 11, 22, 0.8) 44%, rgba(8, 11, 22, 0.5) 100%),
+    linear-gradient(0deg, rgba(8, 11, 22, 0.7), transparent 60%);
+}
+
+.heroInner {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 6vw, 4rem) var(--gutter);
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+  color: var(--on-art);
+}
+
+.heroCopy {
+  max-width: 44ch;
+}
+
+.h1 {
+  font-size: clamp(2rem, 5vw, 3.15rem);
+  line-height: 1.06;
+}
+
+.mark {
+  background: linear-gradient(90deg, #b78bff, var(--brand-b));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lede {
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: clamp(1rem, 1.5vw, 1.0625rem);
+}
+
+.html5 {
+  margin-top: 0.9rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.formSlot {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* --------------------------------------------------------------- blocks ---- */
+
+.block {
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.block:nth-of-type(even) {
+  background: var(--surface);
+}
+
+.shell {
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.h2 {
+  font-size: clamp(1.4rem, 3.2vw, 2rem);
+}
+
+.blockLede {
+  margin-top: 0.7rem;
+  max-width: 58ch;
+  color: var(--ink-2);
+}
+
+/* ---- category cards ---- */
+
+.catGrid {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.catCard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  aspect-ratio: 16 / 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1rem;
+  color: #fff;
+}
+
+.catArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.catShade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(0deg, rgba(8, 11, 22, 0.9) 6%, rgba(8, 11, 22, 0.25) 62%, transparent 100%);
+}
+
+.catName {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+.catCount {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---- feature cards ---- */
+
+.featGrid {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.feat {
+  padding: 1.4rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+
+.featTitle {
+  font-size: 1.0625rem;
+  margin-bottom: 0.4rem;
+}
+
+.featBody {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------- panels ---- */
+
+.panels {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 3rem) var(--gutter) 0;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+.panel {
+  padding: 1.4rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+}
+
+.panelTitle {
+  font-size: 1.125rem;
+  margin-bottom: 0.75rem;
+}
+
+.priceBig {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+}
+
+.list {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+
+.body {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+
+.link {
+  color: var(--action);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* --------------------------------------------------------------- closer ---- */
+
+.closer {
+  max-width: var(--shell);
+  margin: clamp(2.5rem, 6vw, 3.5rem) auto 0;
+  padding: clamp(2rem, 5vw, 2.5rem) var(--gutter);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+.closerCopy {
+  max-width: 42ch;
+}
+
+.conditions {
+  max-width: var(--shell);
+  margin: 2rem auto 0;
+  padding: 0 var(--gutter);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+/* The label that introduces the operator-approved Spanish original on the
+   English page. Quieter than the text it introduces, so it reads as a caption
+   rather than as another paragraph of conditions. */
+.conditionsNote {
+  max-width: var(--shell);
+  margin: 1.25rem auto 0;
+  padding: 0 var(--gutter);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--ink-3);
+  opacity: 0.75;
+}
+
+/* Same size as .conditions; only the top margin is tighter, so the approved
+   Spanish paragraph sits WITH its label instead of floating between blocks. */
+.conditionsEs {
+  max-width: var(--shell);
+  margin: 0.375rem auto 0;
+  padding: 0 var(--gutter);
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+@media (min-width: 700px) {
+  .featGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .catGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .heroInner,
+  .closer {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 30rem);
+    gap: 3.5rem;
+  }
+  .featGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .panels {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
