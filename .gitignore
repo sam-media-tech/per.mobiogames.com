@@ -5,6 +5,9 @@
 .DS_Store
 *.pem
 .env*.local
+# Generated during the Amplify build from console env vars (see amplify.yml).
+# Would contain TALLYMAN_BASE_URL, so it must never be committed.
+.env.production
 .vercel
 next-env.d.ts
 tsconfig.tsbuildinfo

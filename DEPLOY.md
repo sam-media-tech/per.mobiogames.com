@@ -21,6 +21,10 @@ elitegosu.com is the known-good path.
 
 ## Build settings
 
+These now live in `amplify.yml` at the repo root, which Amplify uses in preference to
+the build settings stored in the console. Edit the file, not the console, or your change
+will be ignored.
+
 ```
 Build command:  npm run build
 Output dir:     .next          <- NOT `out`. There is no static export.
@@ -29,8 +33,32 @@ Node:           20, 22 or 24
 
 ## Environment variables
 
-Ahmad will send these separately. Set them in the hosting console
+Ahmad will send the values separately. Set them in the hosting console
 (Amplify: App settings -> Environment variables), not in a file in the repo.
+
+**Setting them in the console is necessary but NOT sufficient on Amplify.** Amplify
+injects console variables into the *build shell* only. Next.js server code — the
+`/api/tallyman` route and `middleware.ts` — runs afterwards in a separate compute
+runtime that does not inherit them, and AWS does this deliberately so build-time
+secrets can't leak into the runtime. The build goes green and `TALLYMAN_BASE_URL` is
+still empty when a request arrives, so the subscribe form silently stays in mock mode.
+
+`amplify.yml` in the repo root is what closes that gap: it copies the variables into
+`.env.production` before `next build`, which Next reads at build time *and* at runtime.
+If you add a new variable, add its name to the `grep` in `amplify.yml` too — otherwise
+it will not reach the server, no matter what the console says.
+
+Variables this app reads:
+
+| Variable | Reaches | Notes |
+|---|---|---|
+| `TALLYMAN_BASE_URL` | server, at runtime | Billing host. Empty = mock mode. |
+| `NEXT_PUBLIC_EVINA_SCRIPT_URL` | browser, inlined at build | Antifraud script. |
+| `NEXT_PUBLIC_EVINA_MERCHANT_ID` | browser, inlined at build | Antifraud merchant id. |
+| `NEXT_PUBLIC_DEMO_MODE` | browser, inlined at build | **Do not set in production.** Turns off image optimisation and puts the access-link form in demo mode. It is for static preview builds only. |
+
+Anything prefixed `NEXT_PUBLIC_` is readable by anyone in the browser, so never put a
+credential behind that prefix.
 
 Until `TALLYMAN_BASE_URL` is set, the subscribe form deliberately creates nothing and
 says so on screen — it will not claim a subscription was made. That is intended.
