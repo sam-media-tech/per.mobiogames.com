@@ -1,0 +1,64 @@
+version: 1
+
+# =============================================================================
+# amplify.yml — build spec for per.mobiogames.com (BeyondVR)
+#
+# WHY THIS FILE EXISTS AT ALL
+#
+# Two separate Amplify behaviours both need pinning down here, and neither can be
+# fixed from the Amplify console alone:
+#
+# 1. ENV VARS DO NOT REACH THE SERVER.
+#    Variables set in "App settings -> Environment variables" are injected into
+#    the BUILD shell only. Next.js server code — /api/tallyman, middleware.ts —
+#    runs afterwards in a separate compute runtime that does NOT inherit them.
+#    AWS does this on purpose, so build-time secrets can't leak into the runtime.
+#    Result: TALLYMAN_BASE_URL is set in the console, the build goes green, and
+#    tallyman.enabled is still false at request time, so /api/tallyman keeps
+#    answering `mock: true`. Nothing in the logs looks wrong.
+#    NEXT_PUBLIC_* fails for a different reason: it is inlined into the client
+#    bundle during `next build`, so it must be on disk BEFORE the build runs.
+#    Writing both into .env.production fixes both cases at once — Next reads that
+#    file at build time and it ships with the deployment.
+#    Ref: https://docs.aws.amazon.com/amplify/latest/userguide/ssr-environment-variables.html
+#
+# 2. AUTO-DETECT CAN SERVE THIS APP STATICALLY.
+#    That is the July problem in DEPLOY.md. Pinning baseDirectory to .next (never
+#    `out`) declares this a server app, so the API route and middleware survive.
+# =============================================================================
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+
+    build:
+      commands:
+        # Materialise the console env vars into a file Next.js actually reads.
+        #
+        # Listed explicitly rather than dumping all of `env`, so the build shell's
+        # own AWS credentials and Amplify internals never land in an artifact that
+        # ships to the runtime.
+        #
+        # `|| true` is not cosmetic: grep exits 1 when it matches nothing, and a
+        # non-zero exit here aborts the whole build. Without it, a branch that
+        # simply has no NEXT_PUBLIC_* set would fail instead of building.
+        - env | grep -e TALLYMAN_BASE_URL -e NEXT_PUBLIC_ >> .env.production || true
+
+        # Print only the KEYS that were captured. Confirms wiring in the build log
+        # without printing the values, since TALLYMAN_BASE_URL is a billing host.
+        - 'echo "env keys written to .env.production:"; cut -d= -f1 .env.production 2>/dev/null | sort -u || echo "  (none — check App settings -> Environment variables)"'
+
+        - npm run build
+
+  artifacts:
+    # .next, NOT `out`. There is no static export — see DEPLOY.md.
+    baseDirectory: .next
+    files:
+      - '**/*'
+
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
